@@ -1,0 +1,3 @@
+[languages]
+lua = ["stylua -s -"]
+markdown = ["shfmt -i 4"]
