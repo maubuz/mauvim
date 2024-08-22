@@ -37,3 +37,10 @@ opt.cursorline = true
 -- From https://bitcrowd.dev/folding-sections-of-markdown-in-vim
 -- vim.cmd "set foldlevelstart=99"
 
+-- Show special chars such as tab, space. Enable with :set list
+vim.opt.listchars:append { eol = '↲', trail = '·', lead = '·' }
+-- Mau, Aug22,24: Undo kickstart.nvim setting
+vim.opt.list = false
+-- Other listchars options
+-- vim.opt.listchars= {tab='🡢 ', tab = '▸ ', extends='>', precedes='<', space='·'}
+
