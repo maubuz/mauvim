@@ -44,10 +44,8 @@ keymap("n", "<S-h>", ":bprevious<CR>", opts)
 keymap("n", "<A-Down>", "<Esc>:m .+1<CR>==", opts)
 keymap("n", "<A-Up>", "<Esc>:m .-2<CR>==", opts)
 
--- Insert --
--- Press jk fast to enter
---keymap("i", "jk", "<ESC>", opts)
-
+-- Select all text
+keymap("n", "<C-a>", "<Esc>ggVG", opts)
 
 -- === Visual Mode === --
 
