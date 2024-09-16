@@ -171,6 +171,9 @@ return {
         -- pyright = {},
         -- rust_analyzer = {},
         bashls = {},
+        -- Mau, Sept 2024: Added but later removed marksman since not required for md formatting and linting
+        -- See plugins/conform.lua and markdownlint-cli2
+        -- marksman = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
