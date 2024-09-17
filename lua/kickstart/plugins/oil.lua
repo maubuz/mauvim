@@ -15,4 +15,9 @@ return {
     dependencies = { { 'echasnovski/mini.icons', opts = {} } },
     -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
   },
+  -- Close Oil anytime with <C-c>
+  vim.keymap.set('n', '<leader>o', ':Oil<CR>', { desc = 'Oil: open' }),
+  vim.keymap.set('n', '<leader>l', function()
+    require('oil').toggle_float()
+  end, { desc = 'Oil: toggle float' }),
 }
