@@ -31,6 +31,7 @@ return {
         -- markdown = { 'cbfmt', 'markdownlint' },
         sh = { 'shfmt' },
         bash = { 'shfmt' },
+        yaml = { 'yamlfix' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
@@ -40,6 +41,12 @@ return {
       formatters = {
         shfmt = {
           prepend_args = { '-i', '4', '-ci', '-bn' },
+        },
+        yamlfix = {
+          -- Ref: https://unix.stackexchange.com/questions/765360/yamlfix-not-using-configuration-neovim-usage
+          env = {
+            YAMLFIX_EXPLICIT_START = false,
+          },
         },
       },
     },

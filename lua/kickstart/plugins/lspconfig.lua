@@ -171,6 +171,10 @@ return {
         -- pyright = {},
         -- rust_analyzer = {},
         bashls = {},
+        -- Mau, Sept 2024: Could not configure yamlls for formatting (see refs below). Since it uses prettier,
+        -- I opted for yamlfix via conform.nvim. However, Prettier seems more flexible and should be tried next.
+        -- Ref 1: https://www.reddit.com/r/neovim/comments/197t7my/question_how_to_configure_yamlls_formatter_with/
+        yamlls = {},
         -- Mau, Sept 2024: Added but later removed marksman since not required for md formatting and linting
         -- See plugins/conform.lua and markdownlint-cli2
         -- marksman = {},
@@ -214,6 +218,8 @@ return {
         'stylua', -- Used to format Lua code
         'shfmt',
         'shellcheck',
+        'yamlls',
+        'yamlfix',
         -- 'bash-debug-adaptor',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
