@@ -9,6 +9,15 @@ return {
         -- markdown = { 'markdownlint' },
         markdown = { 'markdownlint-cli2' },
       }
+      -- Mau, Sept 2024: add toogle lint
+      -- https://github.com/mfussenegger/nvim-lint/issues/411
+      vim.keymap.set('n', '<leader>tl', function()
+        if vim.diagnostic.is_enabled() then
+          vim.diagnostic.enable(false)
+        else
+          vim.diagnostic.enable(true)
+        end
+      end, { desc = '[T]oggle [L]int' })
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
       -- instead set linters_by_ft like this:
