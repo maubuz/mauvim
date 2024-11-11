@@ -175,7 +175,7 @@ return {
         -- Mau, Sept 2024: Could not configure yamlls for formatting (see refs below). Since it uses prettier,
         -- I opted for yamlfix via conform.nvim. However, Prettier seems more flexible and should be tried next.
         -- Ref 1: https://www.reddit.com/r/neovim/comments/197t7my/question_how_to_configure_yamlls_formatter_with/
-        yamlls = {},
+        -- yamlls = {},
         -- Mau, Sept 2024: Added but later removed marksman since not required for md formatting and linting
         -- See plugins/conform.lua and markdownlint-cli2
         -- marksman = {},
