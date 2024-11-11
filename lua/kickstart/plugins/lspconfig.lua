@@ -169,6 +169,7 @@ return {
         -- clangd = {},
         -- gopls = {},
         -- pyright = {},
+        ruff = {},
         -- rust_analyzer = {},
         bashls = {},
         -- Mau, Sept 2024: Could not configure yamlls for formatting (see refs below). Since it uses prettier,
