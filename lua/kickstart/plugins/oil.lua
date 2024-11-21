@@ -10,6 +10,16 @@ return {
           return true
         end,
       },
+      keymaps = {
+        ['<c-u>'] = {
+          'actions.preview_scroll_up',
+          desc = 'Scroll up preview',
+        },
+        ['<c-d>'] = {
+          'actions.preview_scroll_down',
+          desc = 'Scroll down preview',
+        },
+      },
     },
     -- Optional dependencies
     dependencies = { { 'echasnovski/mini.icons', opts = {} } },
