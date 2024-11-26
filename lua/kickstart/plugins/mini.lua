@@ -15,8 +15,19 @@ return {
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
       -- - sd'   - [S]urround [D]elete [']quotes
       -- - sr)'  - [S]urround [R]eplace [)] [']
+      -- Mau, Nov 2024: Enable to replace surround.nvim and change lead to 'z'
       -- Mau, Aug22,24: remove to avoid keymap conflic w/ leap.nvim
-      -- require('mini.surround').setup()
+      require('mini.surround').setup {
+        mappings = {
+          add = 'za', -- Add surrounding in Normal and Visual modes
+          delete = 'zd', -- Delete surrounding
+          find = 'zf', -- Find surrounding (to the right)
+          find_left = 'zF', -- Find surrounding (to the left)
+          highlight = 'zh', -- Highlight surrounding
+          replace = 'zr', -- Replace surrounding
+          update_n_lines = 'zn', -- Update `n_lines`
+        },
+      }
 
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,

@@ -13,31 +13,33 @@ return {
   --         vim.fn["firenvim#install"](0)
   --     end
   -- },
-  {
-    'kylechui/nvim-surround',
-    version = '*', -- Use for stability; omit to use `main` branch for the latest features
-    event = 'VeryLazy',
-    config = function()
-      require('nvim-surround').setup {
-        -- Modify keymaps to avoid conflict with leap.nvim plugin (Mau Apr 21, 2024)
-        -- See discussion https://github.com/ggandor/leap.nvim/discussions/59
-        -- and https://github.com/ggandor/leap.nvim/issues/182
-        keymaps = {
-          insert = '<C-g>z',
-          insert_line = '<C-g>Z',
-          normal = 'yz',
-          normal_cur = 'yzz',
-          normal_line = 'yZ',
-          normal_cur_line = 'yZZ',
-          visual = 'Z',
-          visual_line = 'gZ',
-          delete = 'dz',
-          change = 'cz',
-          change_line = 'cZ',
-        },
-      }
-    end,
-  },
+
+  -- Mau, Nov 2024: Remove nvim-surround, not working as expected most of the time
+  -- {
+  --   'kylechui/nvim-surround',
+  --   version = '*', -- Use for stability; omit to use `main` branch for the latest features
+  --   event = 'VeryLazy',
+  --   config = function()
+  --     require('nvim-surround').setup {
+  --       -- Modify keymaps to avoid conflict with leap.nvim plugin (Mau Apr 21, 2024)
+  --       -- See discussion https://github.com/ggandor/leap.nvim/discussions/59
+  --       -- and https://github.com/ggandor/leap.nvim/issues/182
+  --       keymaps = {
+  --         insert = '<C-g>z',
+  --         insert_line = '<C-g>Z',
+  --         normal = 'yz',
+  --         normal_cur = 'yzz',
+  --         normal_line = 'yZ',
+  --         normal_cur_line = 'yZZ',
+  --         visual = 'Z',
+  --         visual_line = 'gZ',
+  --         delete = 'dz',
+  --         change = 'cz',
+  --         change_line = 'cZ',
+  --       },
+  --     }
+  --   end,
+  -- },
   {
     'ggandor/leap.nvim',
     config = function()
