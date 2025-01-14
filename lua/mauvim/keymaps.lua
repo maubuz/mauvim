@@ -18,6 +18,11 @@ vim.g.maplocalleader = " "
 --   term_mode = "t",
 --   command_mode = "c",
 
+-- Save with Ctrl+s
+keymap("n", "<C-S>", ":update<CR>", opts)
+keymap("n", "<C-S>", "<C-C>:update<CR>", opts)
+keymap("i", "<C-S>", "<C-O>:update<CR>", opts)
+
 -- Normal --
 -- Better window navigation
 keymap("n", "<C-h>", "<C-w>h", opts)
