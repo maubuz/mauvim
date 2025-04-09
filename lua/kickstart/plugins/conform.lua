@@ -34,8 +34,8 @@ return {
       -- end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        markdown = { 'cbfmt', 'markdownlint-cli2' },
-        -- markdown = { 'cbfmt', 'markdownlint' },
+        -- markdown = { 'cbfmt', 'markdownlint-cli2' },
+        markdown = { 'cbfmt', 'markdownlint' },
         sh = { 'shfmt' },
         bash = { 'shfmt' },
         yaml = { 'yamlfix' },
@@ -54,6 +54,9 @@ return {
           env = {
             -- YAMLFIX_EXPLICIT_START = false,
           },
+        },
+        markdownlint = {
+          prepend_args = { '--disable', 'MD013' },
         },
       },
     },

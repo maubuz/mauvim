@@ -6,8 +6,13 @@ return {
     config = function()
       local lint = require 'lint'
       lint.linters_by_ft = {
-        -- markdown = { 'markdownlint' },
-        markdown = { 'markdownlint-cli2' },
+        markdown = { 'markdownlint' },
+        -- markdown = { 'markdownlint-cli2' },
+      }
+      lint.linters.markdownlint.args = {
+        '--stdin',
+        '--disable',
+        'MD013', -- Line length
       }
       -- Mau, Sept 2024: add toogle lint
       -- https://github.com/mfussenegger/nvim-lint/issues/411
