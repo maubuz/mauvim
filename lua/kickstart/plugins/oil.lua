@@ -19,6 +19,9 @@ return {
           'actions.preview_scroll_down',
           desc = 'Scroll down preview',
         },
+        -- Mau,april 24: Avoid conflict with personal window naviation keymaps
+        ['<C-h>'] = false,
+        ['<C-l>'] = false,
       },
     },
     -- Optional dependencies
