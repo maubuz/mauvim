@@ -180,6 +180,10 @@ return {
         -- Mau, Sept 2024: Added but later removed marksman since not required for md formatting and linting
         -- See plugins/conform.lua and markdownlint-cli2
         -- marksman = {},
+        -- Mau, June 2025: Add markdownlint to installing it automatically. Markdownlint is configured in
+        -- nvim.lint and conform.nvim, however, wasn't installed by those tools.
+        markdownlint = {},
+        --
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
