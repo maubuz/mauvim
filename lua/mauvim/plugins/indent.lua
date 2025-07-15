@@ -5,3 +5,6 @@ return {
     ---@type ibl.config
     opts = {},
 }
+
+-- To toggle, use the built-in comman:
+-- :IBLToggle
