@@ -225,7 +225,7 @@ return {
         'shfmt',
         'shellcheck',
         'yamlls',
-        'yamlfix',
+        'yamlfmt',
         -- 'bash-debug-adaptor',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }

@@ -38,7 +38,7 @@ return {
         markdown = { 'cbfmt', 'markdownlint' },
         sh = { 'shfmt' },
         bash = { 'shfmt' },
-        yaml = { 'yamlfix' },
+        yaml = { 'yamlfmt' },
         terraform = { 'terraform_fmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
