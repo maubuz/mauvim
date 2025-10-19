@@ -1,8 +1,6 @@
 -- Description: Configure clipboard to use OSC 52 when in an SSH session
 -- Ref: https://github.com/neovim/neovim/discussions/28010#discussioncomment-10719238
 
-local M = {}
-
 local function paste()
   return {
     vim.split(vim.fn.getreg '', '\n'),
@@ -10,20 +8,16 @@ local function paste()
   }
 end
 
-function M.init()
-  if vim.env.SSH_TTY then
-    vim.g.clipboard = {
-      name = 'OSC 52',
-      copy = {
-        ['+'] = require('vim.ui.clipboard.osc52').copy '+',
-        ['*'] = require('vim.ui.clipboard.osc52').copy '*',
-      },
-      paste = {
-        ['+'] = paste,
-        ['*'] = paste,
-      },
-    }
-  end
+if vim.env.SSH_TTY then
+  vim.g.clipboard = {
+    name = 'OSC 52',
+    copy = {
+      ['+'] = require('vim.ui.clipboard.osc52').copy '+',
+      ['*'] = require('vim.ui.clipboard.osc52').copy '*',
+    },
+    paste = {
+      ['+'] = paste,
+      ['*'] = paste,
+    },
+  }
 end
-
-return M
