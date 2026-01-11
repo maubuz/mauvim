@@ -183,6 +183,7 @@ return {
         -- Mau, June 2025: Add markdownlint to installing it automatically. Markdownlint is configured in
         -- nvim.lint and conform.nvim, however, wasn't installed by those tools.
         markdownlint = {},
+        jsonls = {},
         --
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -238,7 +239,7 @@ return {
             -- by the server configuration above. Useful when disabling
             -- certain features of an LSP (for example, turning off formatting for tsserver)
             server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
+            vim.lsp.config('lspconfig')[server_name].setup(server)
           end,
         },
       }
