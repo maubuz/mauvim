@@ -12,9 +12,15 @@ return {
         --   terminal = {
         --     -- ...
         --   },
-        enabled = 'snacks',
-        snacks = {
-          -- ...
+        -- enabled = 'snacks',
+        -- snacks = {
+        --   -- ...
+        -- },
+        enabled = 'wezterm',
+        wezterm = {
+          direction = 'right',
+          top_level = false,
+          percent = 50,
         },
       },
     }
