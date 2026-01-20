@@ -50,6 +50,9 @@ return {
         shfmt = {
           prepend_args = { '-i', '4', '-ci', '-bn' },
         },
+        yamlfmt = {
+          prepend_args = { '--formatter', 'indent=4,include_document_start=true' },
+        },
         yamlfix = {
           -- Ref: https://unix.stackexchange.com/questions/765360/yamlfix-not-using-configuration-neovim-usage
           env = {
