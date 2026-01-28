@@ -11,7 +11,8 @@ end
 -- print('SSH_TTY:', vim.env.SSH_TTY)
 -- print('WEZTERM_EXECUTABLE:', vim.env.WEZTERM_EXECUTABLE)
 
-if vim.env.SSH_TTY or vim.env.WEZTERM_EXECUTABLE then
+-- if vim.env.SSH_TTY or vim.env.WEZTERM_EXECUTABLE then
+if vim.env.SSH_TTY and vim.env.SSH_TTY ~= '' then
   -- print('Setting OSC 52 clipboard')
   vim.g.clipboard = {
     name = 'OSC 52',
@@ -25,3 +26,4 @@ if vim.env.SSH_TTY or vim.env.WEZTERM_EXECUTABLE then
     },
   }
 end
+
