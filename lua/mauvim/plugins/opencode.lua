@@ -4,6 +4,7 @@ return {
     -- Recommended for `ask()`, required for `toggle()` — otherwise optional
     { 'folke/snacks.nvim', opts = { input = { enabled = true } } },
   },
+  version = '0.4.0',
   config = function()
     vim.g.opencode_opts = {
       -- Your configuration, if any — see `lua/opencode/config.lua`
