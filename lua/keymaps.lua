@@ -1,48 +1,60 @@
--- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
+-- [[ Keymaps ]]
+-- Only keymaps NOT provided by neovim 0.12 defaults.
+-- 0.12 defaults include: Esc clears hlsearch, TextYankPost highlight,
+-- LSP keymaps (K, grn, grr, gri, grt, grx, gra, gO, C-S sig help),
+-- diagnostic nav ([d/]d, [D/]D), list nav ([q/]q, [b/]b),
+-- snippet Tab/S-Tab navigation.
 
--- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+local map = vim.keymap.set
 
--- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- Save with Ctrl-S
+map({ 'n', 'i' }, '<C-S>', '<cmd>update<cr>', { desc = 'Save file' })
 
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+-- Window navigation
+map('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+map('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+map('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+map('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+-- Exit terminal mode
+map('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- Terminal window navigation
+map('t', '<C-h>', '<cmd>wincmd h<cr>', { desc = 'Move focus to the left window' })
+map('t', '<C-j>', '<cmd>wincmd j<cr>', { desc = 'Move focus to the lower window' })
+map('t', '<C-k>', '<cmd>wincmd k<cr>', { desc = 'Move focus to the upper window' })
+map('t', '<C-l>', '<cmd>wincmd l<cr>', { desc = 'Move focus to the right window' })
 
--- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
+-- Diagnostic loclist
+map('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-vim.api.nvim_create_autocmd('TextYankPost', {
-  desc = 'Highlight when yanking (copying) text',
-  group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-})
+-- Resize windows with Ctrl+Arrow
+map('n', '<C-Up>', ':resize -2<cr>', { desc = 'Resize window up' })
+map('n', '<C-Down>', ':resize +2<cr>', { desc = 'Resize window down' })
+map('n', '<C-Left>', ':vertical resize -2<cr>', { desc = 'Resize window left' })
+map('n', '<C-Right>', ':vertical resize +2<cr>', { desc = 'Resize window right' })
 
--- vim: ts=2 sts=2 sw=2 et
+-- Buffer navigation
+map('n', '<S-l>', ':bnext<cr>', { desc = 'Next buffer' })
+map('n', '<S-h>', ':bprevious<cr>', { desc = 'Previous buffer' })
+
+-- Move text up and down
+map('n', '<A-Down>', ':m .+1<cr>==', { desc = 'Move line down' })
+map('n', '<A-Up>', ':m .-2<cr>==', { desc = 'Move line up' })
+map('v', '<A-Down>', ":m '>+1<cr>gv=gv", { desc = 'Move selection down' })
+map('v', '<A-Up>', ":m '<-2<cr>gv=gv", { desc = 'Move selection up' })
+map('x', '<A-Down>', ":m '>+1<cr>gv=gv", { desc = 'Move selection down' })
+map('x', '<A-Up>', ":m '<-2<cr>gv=gv", { desc = 'Move selection up' })
+
+-- Select all
+map('n', '<C-a>', 'gg<S-v>G', { desc = 'Select all' })
+
+-- Stay in indent mode (visual)
+map('v', '<', '<gv', { desc = 'Indent left and reselect' })
+map('v', '>', '>gv', { desc = 'Indent right and reselect' })
+
+-- Paste without yanking replaced text (visual)
+map('v', 'p', '"_dP', { desc = 'Paste without yanking' })
+
+-- Undotree (native 0.12)
+map('n', '<leader>u', '<cmd>Undotree<cr>', { desc = '[U]ndotree' })

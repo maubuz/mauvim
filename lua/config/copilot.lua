@@ -1,0 +1,3 @@
+-- copilot.vim loads automatically, no setup needed
+-- Disable for certain filetypes if needed:
+-- vim.g.copilot_filetypes = { ['*'] = true }
