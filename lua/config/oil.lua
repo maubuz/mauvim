@@ -1,4 +1,6 @@
 require('oil').setup {
+  -- take over directory buffers (e.g. `nvim .`) instead of netrw/neo-tree
+  default_file_explorer = true,
   keymaps = {
     ['<C-u>'] = 'actions.preview_scroll_up',
     ['<C-d>'] = 'actions.preview_scroll_down',

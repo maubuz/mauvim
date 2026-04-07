@@ -1,4 +1,9 @@
-require('neo-tree').setup {}
+require('neo-tree').setup {
+  filesystem = {
+    -- disable netrw hijack so oil.nvim handles directory opens instead
+    hijack_netrw_behavior = 'disabled',
+  },
+}
 
 vim.keymap.set('n', '\\', function()
   require('neo-tree.command').execute { toggle = true, reveal = true }
