@@ -1,6 +1,6 @@
 -- [[ Keymaps ]]
 -- Only keymaps NOT provided by neovim 0.12 defaults.
--- 0.12 defaults include: Esc clears hlsearch, TextYankPost highlight,
+-- 0.12 defaults include: Esc clears hlsearch,
 -- LSP keymaps (K, grn, grr, gri, grt, grx, gra, gO, C-S sig help),
 -- diagnostic nav ([d/]d, [D/]D), list nav ([q/]q, [b/]b),
 -- snippet Tab/S-Tab navigation.
@@ -58,3 +58,12 @@ map('v', 'p', '"_dP', { desc = 'Paste without yanking' })
 
 -- Undotree (native 0.12)
 map('n', '<leader>u', '<cmd>Undotree<cr>', { desc = '[U]ndotree' })
+
+-- Highlight when yanking (copying) text
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})

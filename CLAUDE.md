@@ -65,7 +65,7 @@ Run with: `NVIM_APPNAME=newvim nvim`
 ### Keymaps omitted (now 0.12 defaults)
 
 These are built into neovim 0.12 and do NOT need configuration:
-- `Esc` clears hlsearch, `TextYankPost` yank highlight
+- `Esc` clears hlsearch
 - `K` hover, `grn` rename, `grr` references, `gri` implementation, `gra` code action, `gO` document symbols
 - `[d`/`]d` diagnostic navigation, `[q`/`]q` quickfix, `[b`/`]b` buffer navigation
 - `Tab`/`S-Tab` snippet jump, `C-S` signature help
