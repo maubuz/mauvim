@@ -43,8 +43,8 @@ Run with: `NVIM_APPNAME=newvim nvim`
 ## First launch notes
 
   On first run, vim.pack will clone all plugins (parallel git). After that:
-  1. Run :MasonToolsInstall to install LSP servers and tools
-  2. Run :TSUpdate to install treesitter parsers
+  1. Run `:MasonToolsInstall` to install LSP servers and tools (including `tree-sitter-cli`, required by nvim-treesitter)
+  2. Restart nvim — `require('nvim-treesitter').install(...)` in `config/treesitter.lua` then compiles the parsers asynchronously on startup (watch `:TSLog`)
   3. Build telescope-fzf-native: the PackChanged autocmd handles this, but if needed manually run make in the plugin directory
 
 
@@ -125,7 +125,8 @@ Only `lua/lsp.lua` needs modification — remove the `vim.lsp.completion.enable(
 ## Gotchas
 
 - **`vim.pack.add()` needs `{ load = true }`** during init.lua — otherwise plugins are only installed, not loaded
-- **`nvim-treesitter`** module is `nvim-treesitter.config` (singular), not `nvim-treesitter.configs` (the old name)
+- **`nvim-treesitter`** uses the `main`-branch rewrite API (upstream repo was archived 2026-04-03 but the rewrite still functions). Install parsers via `require('nvim-treesitter').install {...}`; enable highlight/indent per filetype via a `FileType` autocmd calling `vim.treesitter.start()` (see `config/treesitter.lua`). The old `ensure_installed`/`auto_install`/`highlight`/`indent` fields from master-branch are silently ignored — do not use them. Requires `tree-sitter-cli` on PATH (installed via mason).
+- **`jsonc` is not a separate treesitter parser** — the `json` parser handles jsonc buffers via `vim.treesitter.language.get_lang()`. Adding `jsonc` to the install list triggers a "skipping unsupported language" warning.
 - **`opencode.nvim`** has no `setup()` — configure via `vim.g.opencode_opts`, keymaps call `require('opencode')` functions directly
 - **`snacks.nvim`** must be set up before `opencode.nvim` (provides enhanced input UI)
 - **LSP keymaps `gd`, `grr`, `gri`** are overridden in `lsp.lua` to use Telescope — the native 0.12 defaults still exist as fallback if Telescope is removed

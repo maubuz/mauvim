@@ -14,5 +14,6 @@ require('mason-tool-installer').setup {
     'yaml-language-server',
     'yamlfmt',
     'bash-debug-adapter',
+    'tree-sitter-cli', -- required by nvim-treesitter main-branch to compile parsers
   },
 }
