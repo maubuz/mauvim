@@ -36,7 +36,7 @@ vim.pack.add({
 
   -- AI & coding
   gh 'github/copilot.vim',
-  gh 'olimorris/codecompanion.nvim',
+  gh 'folke/sidekick.nvim',
   gh 'MeanderingProgrammer/render-markdown.nvim',
   gh 'NickvanDyke/opencode.nvim',
   gh 'folke/snacks.nvim',

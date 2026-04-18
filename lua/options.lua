@@ -63,6 +63,10 @@ vim.opt.hidden = true
 -- Popup menu height
 vim.opt.pumheight = 10
 
+-- Completion: show menu but don't auto-select or auto-insert.
+-- Prevents LSP autotrigger from inserting snippets while typing normal characters like '-'.
+vim.opt.completeopt = { 'menuone', 'noselect', 'noinsert' }
+
 -- Popup menu border (0.12)
 vim.opt.pumborder = 'single'
 

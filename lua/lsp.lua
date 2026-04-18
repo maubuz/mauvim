@@ -47,8 +47,70 @@ vim.lsp.config['jsonls'] = {
   root_markers = { '.git' },
 }
 
+-- Copilot LSP (github/copilot-language-server-release)
+-- Required by sidekick.nvim for Next Edit Suggestions (NES).
+-- sidekick.nvim needs copilot registered via vim.lsp.config + vim.lsp.enable
+-- (copilot.vim alone starts its own internal client that sidekick can't discover).
+-- Installed automatically via Mason (see config/mason.lua ensure_installed).
+vim.lsp.config['copilot'] = {
+  cmd = { 'copilot-language-server', '--stdio' },
+  root_markers = { '.git' },
+  init_options = {
+    editorInfo = { name = 'Neovim', version = tostring(vim.version()) },
+    editorPluginInfo = { name = 'Neovim', version = tostring(vim.version()) },
+  },
+  -- GitHub device-flow auth commands (:LspCopilotSignIn / :LspCopilotSignOut).
+  -- Adapted from nvim-lspconfig's lsp/copilot.lua — needed because we configure
+  -- the LSP server directly instead of through nvim-lspconfig.
+  -- The copilot-language-server exposes custom 'signIn'/'signOut' LSP requests
+  -- that trigger GitHub's OAuth device flow (copy code → open browser → confirm).
+  on_attach = function(client, bufnr)
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspCopilotSignIn', function()
+      client:request('signIn', vim.empty_dict(), function(err, result)
+        if err then
+          vim.notify(err.message, vim.log.levels.ERROR)
+          return
+        end
+        if result.command then
+          vim.fn.setreg('+', result.userCode)
+          vim.fn.setreg('*', result.userCode)
+          local ok = vim.fn.confirm(
+            'Copied your one-time code to clipboard.\nOpen the browser to complete sign-in?',
+            '&Yes\n&No'
+          )
+          if ok == 1 then
+            client:exec_cmd(result.command, { bufnr = bufnr }, function(cmd_err, cmd_result)
+              if cmd_err then
+                vim.notify(cmd_err.message, vim.log.levels.ERROR)
+                return
+              end
+              if cmd_result.status == 'OK' then
+                vim.notify('Signed in as ' .. cmd_result.user .. '.')
+              end
+            end)
+          end
+        elseif result.status == 'AlreadySignedIn' then
+          vim.notify('Already signed in as ' .. result.user .. '.')
+        end
+      end)
+    end, { desc = 'Sign in to Copilot' })
+
+    vim.api.nvim_buf_create_user_command(bufnr, 'LspCopilotSignOut', function()
+      client:request('signOut', vim.empty_dict(), function(err, result)
+        if err then
+          vim.notify(err.message, vim.log.levels.ERROR)
+          return
+        end
+        if result.status == 'NotSignedIn' then
+          vim.notify('Not signed in.')
+        end
+      end)
+    end, { desc = 'Sign out of Copilot' })
+  end,
+}
+
 -- Enable all configured servers
-vim.lsp.enable { 'lua_ls', 'ruff', 'terraformls', 'bashls', 'jsonls' }
+vim.lsp.enable { 'lua_ls', 'ruff', 'terraformls', 'bashls', 'jsonls', 'copilot' }
 
 -- [[ LspAttach autocmd ]]
 vim.api.nvim_create_autocmd('LspAttach', {

@@ -1,13 +1,11 @@
-# newvim — Neovim 0.12 Native Configuration
+# Neovim 0.12 Native Configuration
 
 A minimal neovim config built on top of neovim 0.12's native features, migrated from a kickstart.nvim fork. The design principle: use built-in functionality first, add plugins only where native features are insufficient.
-
-Run with: `NVIM_APPNAME=newvim nvim`
 
 ## Architecture
 
 ```
-~/.config/newvim/
+~/.config/nvim/
   init.lua                          -- Entry point: leader keys, require order
   .stylua.toml                      -- Lua formatter: 2-space indent, 160 col, single quotes
   lua/
@@ -32,7 +30,7 @@ Run with: `NVIM_APPNAME=newvim nvim`
       copilot.lua                   -- GitHub Copilot (auto-loads)
       toggleterm.lua                -- Terminal (<C-\>, <leader>tt, <leader>tv)
       dap.lua                       -- Debug adapter (F1-F7, <leader>b)
-      codecompanion.lua             -- AI chat via copilot (<leader>a, <leader>tc)
+      sidekick.lua                  -- AI sidekick: NES + CLI terminal (<leader>a*, <leader>e*, ]e/[e)
       snacks.lua                    -- snacks.nvim setup (input enabled, opencode dependency)
       opencode.lua                  -- Opencode integration (<leader>i*)
       indent-blankline.lua          -- Indent guides (<leader>ti toggle)
@@ -75,7 +73,7 @@ These are built into neovim 0.12 and do NOT need configuration:
 
 ### Startup flow
 
-`init.lua` → options → keymaps → clipboard → **pack.lua** (installs/loads all plugins) → config/*.lua (configures each plugin) → **lsp.lua** (must be last, depends on telescope + lazydev)
+`init.lua` → options → keymaps → clipboard → **pack.lua** (installs/loads all plugins) → config/*.lua (configures each plugin, sidekick after copilot, snacks before opencode) → **lsp.lua** (must be last, depends on telescope + lazydev)
 
 ### LSP pipeline
 
@@ -118,9 +116,11 @@ Edit `lua/config/conform.lua`: add the filetype → formatter mapping to `format
 
 Edit `lua/config/lint.lua`: add the filetype → linter mapping to `linters_by_ft`.
 
-### Swap native completion back to nvim-cmp
+### Native completion behavior
 
-Only `lua/lsp.lua` needs modification — remove the `vim.lsp.completion.enable()` call in the `LspAttach` autocmd and configure nvim-cmp instead. The 0.12 native completion is new; this isolation is intentional.
+Native completion uses `vim.lsp.completion.enable()` with `autotrigger = true` (in `lsp.lua`). The popup appears as you type but `completeopt = { 'menuone', 'noselect', 'noinsert' }` (in `options.lua`) prevents auto-inserting snippets — you must explicitly select an item. This avoids characters like `-` triggering unwanted snippet expansion.
+
+To swap back to nvim-cmp: remove the `vim.lsp.completion.enable()` call in the `LspAttach` autocmd and configure nvim-cmp instead. Only `lua/lsp.lua` needs modification. The 0.12 native completion is new; this isolation is intentional.
 
 ## Gotchas
 
@@ -130,6 +130,8 @@ Only `lua/lsp.lua` needs modification — remove the `vim.lsp.completion.enable(
 - **`opencode.nvim`** has no `setup()` — configure via `vim.g.opencode_opts`, keymaps call `require('opencode')` functions directly
 - **`snacks.nvim`** must be set up before `opencode.nvim` (provides enhanced input UI)
 - **LSP keymaps `gd`, `grr`, `gri`** are overridden in `lsp.lua` to use Telescope — the native 0.12 defaults still exist as fallback if Telescope is removed
+- **`sidekick.nvim`** requires `copilot-language-server` registered via `vim.lsp.config` + `vim.lsp.enable` for NES (Next Edit Suggestions) — `copilot.vim`'s internal LSP client alone is not enough, sidekick checks `vim.lsp.is_enabled()`. Also depends on `snacks.nvim`. NES keymaps use `]e`/`[e` for navigation and `<leader>e*` for actions — `<Tab>` is intentionally not overridden. CLI keymaps use `<leader>a*` prefix
+- **`copilot-language-server`** is configured as a native LSP in `lsp.lua` (not via nvim-lspconfig). Auth commands (`:LspCopilotSignIn` / `:LspCopilotSignOut`) are provided by the `on_attach` handler since we don't use nvim-lspconfig. Installed via Mason (`ensure_installed` in `config/mason.lua`)
 
 ## Configured LSP Servers
 
@@ -140,5 +142,6 @@ Only `lua/lsp.lua` needs modification — remove the `vim.lsp.completion.enable(
 | terraformls | Terraform/HCL | terraform_fmt | — |
 | bashls | Bash/Shell | shfmt | shellcheck |
 | jsonls | JSON/JSONC | — | — |
+| copilot | All (Copilot NES) | — | — |
 | — | Markdown | cbfmt, markdownlint | markdownlint |
 | — | YAML | yamlfmt | — |
