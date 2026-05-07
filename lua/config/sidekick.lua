@@ -16,23 +16,23 @@ require('sidekick').setup {
 }
 
 -- NES (Next Edit Suggestions) keymaps
-vim.keymap.set('n', ']e', function()
+vim.keymap.set('n', '<leader>ce', function()
   require('sidekick.nes').jump()
 end, { desc = 'Jump to edit suggestion' })
 
-vim.keymap.set('n', '<leader>ea', function()
+vim.keymap.set('n', '<leader>cc', function()
   require('sidekick.nes').apply()
 end, { desc = '[E]dit suggestion [A]pply' })
 
-vim.keymap.set('n', '<leader>ee', function()
+vim.keymap.set('n', '<leader>cj', function()
   require('sidekick').nes_jump_or_apply()
 end, { desc = '[E]dit suggestion jump/apply' })
 
-vim.keymap.set('n', '<leader>ec', function()
+vim.keymap.set('n', '<leader>cx', function()
   require('sidekick').clear()
 end, { desc = '[E]dit suggestion [C]lear' })
 
-vim.keymap.set('n', '<leader>et', function()
+vim.keymap.set('n', '<leader>ct', function()
   require('sidekick.nes').toggle()
 end, { desc = '[E]dit suggestion [T]oggle' })
 

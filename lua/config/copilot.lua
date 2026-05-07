@@ -8,7 +8,7 @@
 vim.g.copilot_enabled = 0
 
 -- Toggle inline ghost text on/off when needed
-vim.keymap.set('n', '<leader>ct', function()
+vim.keymap.set('n', '<leader>ci', function()
   vim.g.copilot_enabled = vim.g.copilot_enabled == 0 and 1 or 0
 end, { desc = 'Toggle Copilot inline suggestion' })
 
