@@ -49,6 +49,11 @@ map('x', '<A-Up>', ":m '<-2<cr>gv=gv", { desc = 'Move selection up' })
 -- Select all
 map('n', '<C-a>', 'gg<S-v>G', { desc = 'Select all' })
 
+-- Readline-style forward word delete (insert mode); <C-w> already deletes backwards.
+-- `de` (not `dw`) stops at the end of the word and leaves the trailing whitespace, like readline's
+-- kill-word. <C-\><C-o> keeps the cursor put, otherwise it drifts left at end of line.
+map('i', '<A-d>', '<C-\\><C-o>de', { desc = 'Delete word forward' })
+
 -- Stay in indent mode (visual)
 map('v', '<', '<gv', { desc = 'Indent left and reselect' })
 map('v', '>', '>gv', { desc = 'Indent right and reselect' })
