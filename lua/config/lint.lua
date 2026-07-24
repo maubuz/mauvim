@@ -2,6 +2,9 @@ local lint = require 'lint'
 
 lint.linters_by_ft = {
   markdown = { 'markdownlint' },
+  sh = { 'shellcheck' },
+  bash = { 'shellcheck' },
+  zsh = { 'shellcheck' },
 }
 
 -- Override markdownlint to disable MD013 (line length)
