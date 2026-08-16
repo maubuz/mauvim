@@ -54,6 +54,7 @@ vim.lsp.config['jsonls'] = {
 -- Installed automatically via Mason (see config/mason.lua ensure_installed).
 vim.lsp.config['copilot'] = {
   cmd = { 'copilot-language-server', '--stdio' },
+  filetypes = { '*' },
   root_markers = { '.git' },
   init_options = {
     editorInfo = { name = 'Neovim', version = tostring(vim.version()) },
