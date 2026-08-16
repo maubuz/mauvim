@@ -40,8 +40,11 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Sets how neovim will display certain whitespace characters in the editor
+-- Enable with :set list
 vim.opt.list = false
 vim.opt.listchars = { eol = '↲', trail = '·', lead = '·', tab = '» ', nbsp = '␣' }
+-- Other listchars options
+-- vim.opt.listchars= {tab='🡢 ', tab = '▸ ', extends='>', precedes='<', space='·'}
 
 -- Preview substitutions live, as you type
 vim.opt.inccommand = 'split'
@@ -53,8 +56,11 @@ vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 
 -- Indentation
+-- See where shiftwidthand tabstop are set with:
+-- :set tabstop? | set shiftwidth? | set softtabstop?
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
+-- When 'softtabstop' is negative, the value of 'shiftwidth' is used.
 vim.opt.softtabstop = -1
 
 -- Allow modified unsaved buffers to be hidden

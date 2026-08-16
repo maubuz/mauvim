@@ -5,6 +5,14 @@
 -- diagnostic nav ([d/]d, [D/]D), list nav ([q/]q, [b/]b),
 -- snippet Tab/S-Tab navigation.
 
+-- Modes
+--   normal_mode = "n",
+--   insert_mode = "i",
+--   visual_mode = "v",
+--   visual_block_mode = "x",
+--   term_mode = "t",
+--   command_mode = "c",
+
 local map = vim.keymap.set
 
 -- Save with Ctrl-S
