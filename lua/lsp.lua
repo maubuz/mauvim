@@ -41,6 +41,9 @@ vim.lsp.config['bashls'] = {
   root_markers = { '.git' },
 }
 
+-- Note: LSP servers require a file on disk & root marker to establish workspace URIs.
+-- Unnamed buffers or CLI-piped text (nvim -) will not attach LSP servers; use conform.nvim
+-- CLI formatters (e.g. jq, shfmt) for stdin-based formatting.
 vim.lsp.config['jsonls'] = {
   cmd = { 'vscode-json-language-server', '--stdio' },
   filetypes = { 'json', 'jsonc' },
