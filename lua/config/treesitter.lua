@@ -12,6 +12,7 @@ local languages = {
   'query',
   'vim',
   'vimdoc',
+  'yaml',
 }
 
 require('nvim-treesitter').install(languages)

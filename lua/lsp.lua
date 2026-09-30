@@ -50,6 +50,17 @@ vim.lsp.config['jsonls'] = {
   root_markers = { '.git' },
 }
 
+vim.lsp.config['yamlls'] = {
+  cmd = { 'yaml-language-server', '--stdio' },
+  filetypes = { 'yaml', 'yaml.docker-compose', 'yaml.gitlab' },
+  root_markers = { '.git' },
+  settings = {
+    yaml = {
+      schemaStore = { enable = true, url = 'https://www.schemastore.org/api/json/catalog.json' },
+    },
+  },
+}
+
 -- Copilot LSP (github/copilot-language-server-release)
 -- Required by sidekick.nvim for Next Edit Suggestions (NES).
 -- sidekick.nvim needs copilot registered via vim.lsp.config + vim.lsp.enable
@@ -114,7 +125,7 @@ vim.lsp.config['copilot'] = {
 }
 
 -- Enable all configured servers
-vim.lsp.enable { 'lua_ls', 'ruff', 'terraformls', 'bashls', 'jsonls', 'copilot' }
+vim.lsp.enable { 'lua_ls', 'ruff', 'terraformls', 'bashls', 'jsonls', 'yamlls', 'copilot' }
 
 -- [[ LspAttach autocmd ]]
 vim.api.nvim_create_autocmd('LspAttach', {

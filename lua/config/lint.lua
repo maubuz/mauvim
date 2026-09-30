@@ -2,6 +2,7 @@ local lint = require 'lint'
 
 lint.linters_by_ft = {
   markdown = { 'markdownlint' },
+  yaml = { 'yamllint' },
 }
 
 -- Override markdownlint to disable MD013 (line length)
