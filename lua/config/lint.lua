@@ -10,6 +10,12 @@ lint.linters.markdownlint.args = {
   '--disable', 'MD013', '--',
 }
 
+-- Override yamllint to raise the line-length limit to 120
+lint.linters.yamllint.args = {
+  '-d', '{extends: default, rules: {line-length: {max: 120}}}',
+  '--format', 'parsable', '-',
+}
+
 local lint_enabled = true
 vim.keymap.set('n', '<leader>tl', function()
   lint_enabled = not lint_enabled
