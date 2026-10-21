@@ -7,6 +7,7 @@ require('which-key').add {
   { '<leader>s', group = '[S]earch' },
   { '<leader>w', group = '[W]orkspace' },
   { '<leader>t', group = '[T]oggle' },
+  { '<leader>g', group = '[G]it' },
   { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
   { '<leader>a', group = '[A]I Sidekick', mode = { 'n', 'v' } },
   { '<leader>e', group = '[E]dit suggestions' },

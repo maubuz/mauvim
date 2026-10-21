@@ -31,3 +31,4 @@ local function diffview_branch_diff()
 end
 
 vim.keymap.set('n', '<leader>gD', diffview_branch_diff, { desc = '[g]it [D]iff two branches' })
+vim.keymap.set('n', '<leader>go', '<cmd>DiffviewOpen<cr>', { desc = '[g]it diffview [o]pen' })
