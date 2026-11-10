@@ -38,7 +38,8 @@ vim.pack.add({
   gh 'github/copilot.vim',
   gh 'folke/sidekick.nvim',
   gh 'MeanderingProgrammer/render-markdown.nvim',
-  gh 'NickvanDyke/opencode.nvim',
+  -- gh 'NickvanDyke/opencode.nvim', -- previous plugin; swap back with config/opencode.lua in init.lua
+  { src = gh 'sudo-tee/opencode.nvim', name = 'sudo-tee-opencode.nvim' },
   gh 'folke/snacks.nvim',
 
   -- Terminal & debugging

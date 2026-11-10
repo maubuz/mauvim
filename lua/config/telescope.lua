@@ -3,6 +3,11 @@ local builtin = require 'telescope.builtin'
 local themes = require 'telescope.themes'
 
 telescope.setup {
+  defaults = {
+    layout_config = {
+      horizontal = { preview_width = 0.65 },
+    },
+  },
   extensions = {
     ['ui-select'] = {
       themes.get_dropdown(),
